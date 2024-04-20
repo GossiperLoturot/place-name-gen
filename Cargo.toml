@@ -1,0 +1,9 @@
+[package]
+name = "place-name-gen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+csv = "1.3"
+rand = "0.8"
+symspell = "0.4"
