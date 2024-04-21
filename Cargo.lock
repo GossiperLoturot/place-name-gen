@@ -137,15 +137,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c198f91728a82281a64e1f4f9eeb25d82cb32a5de251c6bd1b5154d63a8e7bd"
 
 [[package]]
-name = "locgen"
-version = "0.1.0"
-dependencies = [
- "csv",
- "rand",
- "symspell",
-]
-
-[[package]]
 name = "log"
 version = "0.4.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -162,6 +153,16 @@ name = "once_cell"
 version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
+
+[[package]]
+name = "place-name-gen"
+version = "0.1.0"
+dependencies = [
+ "csv",
+ "rand",
+ "serde",
+ "symspell",
+]
 
 [[package]]
 name = "ppv-lite86"
