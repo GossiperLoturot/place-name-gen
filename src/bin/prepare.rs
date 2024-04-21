@@ -15,12 +15,12 @@ struct OutputRecord {
 
 fn main() {
     let mut spell: SymSpell<AsciiStringStrategy> = SymSpell::default();
-    spell.load_dictionary("frequency_dictionary_en_82_765.txt", 0, 1, " ");
-    spell.load_bigram_dictionary("frequency_bigramdictionary_en_243_342.txt", 0, 2, " ");
+    spell.load_dictionary("data/frequency_dictionary_en_82_765.txt", 0, 1, " ");
+    spell.load_bigram_dictionary("data/frequency_bigramdictionary_en_243_342.txt", 0, 2, " ");
 
     let mut reader = csv::ReaderBuilder::new()
         .delimiter(b'|')
-        .from_path("city.csv")
+        .from_path("data/city.csv")
         .unwrap();
 
     let mut text_col = std::collections::HashSet::new();
