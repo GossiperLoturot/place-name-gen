@@ -4,42 +4,54 @@ const COUNT: usize = 1000;
 
 #[derive(Debug, serde::Deserialize)]
 struct InputRecord {
-    term: String,
     local_freq: i64,
+    en: String,
+    jp: String,
 }
 
 #[derive(Debug, serde::Serialize)]
 struct OutputRecord {
-    city: String,
+    en: String,
+    jp: String,
 }
 
 fn main() {
-    let mut fst_reader = csv::Reader::from_path("fst_term.csv").unwrap();
-    let mut snd_reader = csv::Reader::from_path("snd_term.csv").unwrap();
+    let mut fst_reader = csv::Reader::from_path("fst_term_l10n.csv").unwrap();
+    let mut snd_reader = csv::Reader::from_path("snd_term_l10n.csv").unwrap();
 
-    let mut fst_col = std::collections::HashMap::<String, i64>::new();
+    let mut fst_weight_col = vec![];
+    let mut fst_jp_col = vec![];
+    let mut fst_en_col = vec![];
     for record in fst_reader.deserialize::<InputRecord>().flatten() {
-        fst_col.insert(record.term, record.local_freq);
+        fst_weight_col.push(record.local_freq as f64);
+        fst_en_col.push(record.en);
+        fst_jp_col.push(record.jp);
     }
 
-    let mut snd_col = std::collections::HashMap::<String, i64>::new();
+    let mut snd_weight_col = vec![];
+    let mut snd_jp_col = vec![];
+    let mut snd_en_col = vec![];
     for record in snd_reader.deserialize::<InputRecord>().flatten() {
-        snd_col.insert(record.term, record.local_freq);
+        snd_weight_col.push(record.local_freq);
+        snd_en_col.push(record.en);
+        snd_jp_col.push(record.jp);
     }
 
     let mut rng = thread_rng();
-    let fst_sample = fst_col.keys().collect::<Vec<_>>();
-    let fst_sample = fst_sample
-        .choose_multiple_weighted(&mut rng, COUNT, |x| fst_col[*x] as f64)
-        .unwrap();
-    let snd_sample = snd_col.keys().collect::<Vec<_>>();
-    let snd_sample = snd_sample
-        .choose_multiple_weighted(&mut rng, COUNT, |x| snd_col[*x] as f64)
-        .unwrap();
+
+    let dist = rand::distributions::WeightedIndex::new(&fst_weight_col).unwrap();
+    let fst_idx = dist.sample_iter(&mut rng).take(COUNT).collect::<Vec<_>>();
+
+    let dist = rand::distributions::WeightedIndex::new(&snd_weight_col).unwrap();
+    let snd_idx = dist.sample_iter(&mut rng).take(COUNT).collect::<Vec<_>>();
 
     let mut writer = csv::Writer::from_path("generated.csv").unwrap();
-    for (fst, snd) in Iterator::zip(fst_sample, snd_sample) {
-        let city = format!("{}{}", fst, snd);
-        writer.serialize(OutputRecord { city }).unwrap();
+    for (fst, snd) in Iterator::zip(fst_idx.into_iter(), snd_idx.into_iter()) {
+        writer
+            .serialize(OutputRecord {
+                en: format!("{}{}", fst_en_col[fst], snd_en_col[snd]),
+                jp: format!("{}{}", fst_jp_col[fst], snd_jp_col[snd]),
+            })
+            .unwrap();
     }
 }

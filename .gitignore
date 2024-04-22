@@ -2,4 +2,9 @@
 
 fst_term.csv
 snd_term.csv
+
+/venv
+fst_term_l10n.csv
+snd_term_l10n.csv
+
 generated.csv
