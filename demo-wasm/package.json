@@ -1,0 +1,21 @@
+{
+  "name": "demo-wasm",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "fmt": "biome format ./src --write"
+  },
+  "dependencies": {
+    "solid-js": "1.8.*",
+    "terminal.css": "0.7.*"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.*",
+    "typescript": "5.4.*",
+    "vite": "5.2.*",
+    "vite-plugin-solid": "2.10.*"
+  }
+}
