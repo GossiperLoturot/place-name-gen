@@ -1,10 +1,11 @@
 /target
 
-fst_term.csv
-snd_term.csv
-
 /venv
-fst_term_l10n.csv
-snd_term_l10n.csv
 
-generated.csv
+/data/fst_term.csv
+/data/snd_term.csv
+/data/fst_term_l10n.csv
+/data/snd_term_l10n.csv
+
+/gen-wasm/src/data.rs
+/gen-native/src/data.rs

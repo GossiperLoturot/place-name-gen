@@ -22,5 +22,5 @@ def l10n(input_file, output_file):
     input_file.close()
     output_file.close()
 
-l10n("fst_term.csv", "fst_term_l10n.csv")
-l10n("snd_term.csv", "snd_term_l10n.csv")
+l10n("data/fst_term.csv", "data/fst_term_l10n.csv")
+l10n("data/snd_term.csv", "data/snd_term_l10n.csv")
