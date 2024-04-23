@@ -1,7 +1,8 @@
 # place-name-gen
 
-- City Database
-https://github.com/grammakov/USA-cities-and-states
+Place database
+- https://github.com/grammakov/USA-cities-and-states
+- https://github.com/bwghughes/badbatch
 
-- Spell Database
-https://github.com/reneklacan/symspell
+Spell database
+- https://github.com/reneklacan/symspell

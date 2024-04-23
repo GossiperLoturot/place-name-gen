@@ -1,9 +1,15 @@
 use symspell::*;
 
 #[derive(Debug, serde::Deserialize)]
-struct InputRecord {
+struct InputRecord0 {
     #[serde(rename = "City")]
-    city: String,
+    text: String,
+}
+
+#[derive(Debug, serde::Deserialize)]
+struct InputRecord1 {
+    #[serde(rename = "place_name")]
+    text: String,
 }
 
 #[derive(Debug, serde::Serialize)]
@@ -18,17 +24,31 @@ fn main() {
     spell.load_dictionary("data/frequency_dictionary_en_82_765.txt", 0, 1, " ");
     spell.load_bigram_dictionary("data/frequency_bigramdictionary_en_243_342.txt", 0, 2, " ");
 
+    let mut text_col = std::collections::HashSet::new();
+
     let mut reader = csv::ReaderBuilder::new()
         .delimiter(b'|')
-        .from_path("data/city.csv")
+        .from_path("data/city_us.csv")
         .unwrap();
-
-    let mut text_col = std::collections::HashSet::new();
-    for record in reader.deserialize::<InputRecord>().flatten() {
-        let text = record.city;
+    for record in reader.deserialize::<InputRecord0>().flatten() {
+        let text = record.text;
         let text = text.replace(" ", "").to_lowercase();
         text_col.insert(text);
     }
+    println!("{}", text_col.len());
+
+    let mut reader = csv::ReaderBuilder::new()
+        .from_path("data/city_uk.csv")
+        .unwrap();
+    for record in reader.deserialize::<InputRecord1>().flatten() {
+        let text = record.text;
+        let text = text.replace(" ", "").to_lowercase();
+        if !text.is_ascii() {
+            continue;
+        }
+        text_col.insert(text);
+    }
+    println!("{}", text_col.len());
 
     let mut global_freq = std::collections::HashMap::<String, i64>::new();
     let mut fst_col = std::collections::HashMap::<String, i64>::new();

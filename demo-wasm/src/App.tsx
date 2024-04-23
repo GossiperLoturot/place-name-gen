@@ -24,7 +24,7 @@ const App: Component = () => {
     <div class="container">
       <h1>place-name-gen</h1>
       <p>
-        架空の地名を生成します。2つの英単語に分割できるアメリカの地名から前後の単語を収集し、ランダムにサンプルします。
+        架空の地名を生成します。2つの英単語に分割できるアメリカとイギリスの地名から前後の単語を収集し、ランダムにサンプルします。
       </p>
       <Show when={suspend()} fallback={<div>Loading...</div>}>
         <div class="btn-group">
