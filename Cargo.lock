@@ -108,6 +108,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
+name = "gen-native"
+version = "0.1.0"
+dependencies = [
+ "csv",
+ "rand",
+ "serde",
+]
+
+[[package]]
 name = "gen-wasm"
 version = "0.1.0"
 dependencies = [
@@ -163,16 +172,6 @@ name = "log"
 version = "0.4.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
-
-[[package]]
-name = "make-db"
-version = "0.1.0"
-dependencies = [
- "csv",
- "rand",
- "serde",
- "symspell",
-]
 
 [[package]]
 name = "memchr"
@@ -330,6 +329,16 @@ name = "unidecode"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "402bb19d8e03f1d1a7450e2bd613980869438e0666331be3e073089124aa1adc"
+
+[[package]]
+name = "warmup"
+version = "0.1.0"
+dependencies = [
+ "csv",
+ "rand",
+ "serde",
+ "symspell",
+]
 
 [[package]]
 name = "wasi"

@@ -1,3 +1,3 @@
 [workspace]
 resolver = "2"
-members = ["gen-wasm", "warmup"]
+members = [ "gen-native","gen-wasm", "warmup"]
