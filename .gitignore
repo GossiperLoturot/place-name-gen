@@ -1,7 +1,5 @@
 /target
 
-/venv
-
 /data/fst_term.csv
 /data/snd_term.csv
 /data/fst_term_l10n.csv
